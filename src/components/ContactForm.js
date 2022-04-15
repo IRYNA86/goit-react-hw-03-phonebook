@@ -27,6 +27,9 @@ display: flex;
 `
 
 class ContactForm extends React.Component {
+    static propTypes = {
+    addContact: PropTypes.func,
+  };
     state = {
         name: '',
         number: ''
@@ -39,13 +42,12 @@ class ContactForm extends React.Component {
         })
     };
 
-    handleSubmit = ({resetForm}) => {
-        // event.preventDefault();
+    handleSubmit = (state, {resetForm}) => {
         this.props.onAddContact({ ...this.state });
         this.setState({ name: '', number: '' });
-        resetForm()
+        resetForm();
     };
-
+// 
     render() {
         
         return (
@@ -80,9 +82,5 @@ class ContactForm extends React.Component {
             </Formik>)
     }
 }
-ContactForm.propTypes = {
-  onAddContact: PropTypes.func,
-  name: PropTypes.string,
-  number: PropTypes.string,
-};
+
 export default ContactForm

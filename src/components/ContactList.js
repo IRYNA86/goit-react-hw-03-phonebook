@@ -17,14 +17,14 @@ margin-bottom: 5px;
 
 const ContactList = ({ contacts, onRemoveContact }) => (
   <ul>
-    {contacts.map((contact) => (
-      <Li key={contact.id}>
-        {contact.name + ":" + contact.number}
+    {contacts.map(({ id, name, number }) => (
+      <Li key={id}>
+        {name + ":" + number}
             {
                 <Button
                     type="button"
                     name="delete"
-                    onClick={() => onRemoveContact(contact.id)}
+                    onClick={() => onRemoveContact(id)}
           >
             delete
           </Button>

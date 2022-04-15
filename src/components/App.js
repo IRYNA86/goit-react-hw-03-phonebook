@@ -18,16 +18,13 @@ class App extends React.Component {
   ],
   filter: ''
       }
-       
-    addContact = (task) => {
-    const searchSameName = this.state.contacts
-      .map((cont) => cont.name)
-      .includes(task.name);
-
+    
+  addContact = (task) => {
+      const searchSameName = this.state.contacts
+      .some(({name}) => name === task.name)
+      
     if (searchSameName) {
       alert(`${task.name} is already in contacts`);
-    } else if (task.name.length === 0) {
-      alert("Fields must be filled!");
     } else {
       const contact = {
         ...task,
@@ -70,15 +67,14 @@ class App extends React.Component {
 
         <ContactForm onAddContact={this.addContact} />
         <h2>Contacts</h2>
-        {visibleContacts.length > 1 && (
+        
           <Filter value={filter} onChangeFilter={this.changeFilter} />
-        )}
-        {visibleContacts.length > 0 && (
+       
           <ContactList
             contacts={visibleContacts}
             onRemoveContact={this.removeContact}
           />
-        )}
+        
       </Div>
     );
   }
